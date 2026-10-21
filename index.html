@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Автомобили из Южной Кореи под ключ: подбор, проверка, доставка. Черновик сайта AutoHubKorea.">
+<meta name="robots" content="noindex">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Сайт AutoHubKorea</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;500;700&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: film first. A sticky 16:9 scroll scene carries the journey Korea → world,
+   then light bands on a 12-column grid, one navy band for the company facts, navy footer. */
+:root{
+  --ink:#041532;          /* brand navy, film + footer, fixed in both themes */
+  --ink-2:#0A2048;
+  --on-ink:#EEF2F8;
+  --on-ink-mute:#9AA9C2;
+  --blue:#005EED;         /* brand blue: main action only */
+  --blue-hover:#1F72FF;
+  --bg:#F1F3F6;
+  --surface:#F9FAFC;
+  --fg:#0B1830;
+  --mute:#56657E;
+  --line:#D4DBE6;
+  --tint:#E2EBF9;
+  --accent-fg:#0057DB;
+  --f-display:"Geologica","Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --hh:64px;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#06112A; --surface:#0A1836; --fg:#E7ECF4; --mute:#8D9BB4; --line:#1C2D52; --tint:#0F2550; --accent-fg:#6AA2FF;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#06112A; --surface:#0A1836; --fg:#E7ECF4; --mute:#8D9BB4; --line:#1C2D52; --tint:#0F2550; --accent-fg:#6AA2FF;
+  color-scheme:dark;
+}
+
+body{background:var(--bg);color:var(--fg);font:400 17px/1.55 var(--f-body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:2px}
+h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:700;text-transform:uppercase;letter-spacing:-.01em;line-height:.98;text-wrap:balance}
+p{margin:0}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.in{max-width:1240px;margin-inline:auto;padding-inline:clamp(0px,3vw,32px)}
+.g{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2.4vw,32px)}
+.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:4px;background:var(--blue);color:#F5F8FF;font:600 16px/1 var(--f-body);text-decoration:none;transition:background .25s var(--ease),transform .25s var(--ease)}
+.btn:hover{background:var(--blue-hover)}
+.btn:active{transform:translateY(1px)}
+.btn svg{width:16px;height:16px;flex:none}
+.link{font-weight:500;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.link:hover{text-decoration-thickness:2px}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--ink);color:var(--on-ink);border-bottom:1px solid rgba(238,242,248,.08)}
+.top .in{height:var(--hh);display:flex;align-items:center;gap:32px}
+.top .logo{display:flex;color:var(--on-ink)}
+.top .logo svg{height:30px;width:auto}
+.top nav{display:flex;gap:28px;margin-left:auto}
+.top nav a{font-size:15px;color:var(--on-ink-mute);text-decoration:none;transition:color .2s}
+.top nav a:hover{color:var(--on-ink)}
+.top .btn{min-height:40px;padding:0 16px;font-size:15px}
+@media (max-width:860px){ .top nav{display:none} .top .btn{margin-left:auto} }
+@media (max-width:420px){ .top .logo svg{height:24px} .top .btn{padding:0 12px} }
+
+/* Film */
+.film{position:relative;height:640vh;background:var(--ink);color:var(--on-ink)}
+.stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--hh));height:calc(100svh - var(--hh) - env(safe-area-inset-top,0px));overflow:hidden}
+#cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(4,21,50,.88) 0%,rgba(4,21,50,.55) 26%,rgba(4,21,50,0) 52%),
+             linear-gradient(0deg,rgba(4,21,50,.8) 0%,rgba(4,21,50,0) 22%)}
+.ui{position:absolute;inset:0}
+.ui .in{position:relative;height:100%}
+.ch{position:absolute;left:clamp(0px,3vw,32px);right:clamp(0px,3vw,32px);top:clamp(24px,7vh,80px);opacity:0;visibility:hidden;will-change:opacity,transform}
+.ch.on{visibility:visible}
+.ch .count{color:var(--on-ink-mute);margin-bottom:18px;display:flex;gap:14px}
+.ch .count b{color:var(--on-ink);font-weight:500}
+.ch h1,.ch h2{grid-column:1 / span 7;font-size:clamp(34px,5.2vw,84px)}
+.ch .side{grid-column:9 / span 4;align-self:start;padding-top:.6em;display:grid;gap:22px;max-width:32ch;font-size:clamp(16px,1.25vw,19px);line-height:1.5;color:#D7DFEC}
+.ch .side .note{color:var(--on-ink-mute);font-size:14px}
+.ch .acts{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+.ch .acts .link{color:var(--on-ink)}
+.ch .big{grid-column:1 / span 7;display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.ch .big .num{font:300 clamp(84px,15vw,220px)/.82 var(--f-display);letter-spacing:-.04em}
+.ch .big .cap{font:700 clamp(16px,1.6vw,24px)/1.05 var(--f-display);text-transform:uppercase;padding-bottom:.6em}
+.ch .big .cap sup{font-size:.7em;color:var(--blue-hover)}
+@media (max-width:860px){
+  .ch h1,.ch h2,.ch .big{grid-column:1 / -1}
+  .ch .side{grid-column:1 / -1;margin-top:18px;max-width:40ch}
+}
+
+.track{position:absolute;left:0;right:0;bottom:0;padding-bottom:max(18px,env(safe-area-inset-bottom,0px))}
+.track .in{display:flex;align-items:flex-end;gap:24px}
+.segs{flex:1;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;min-width:0}
+.seg{display:grid;gap:8px;color:var(--on-ink-mute);transition:color .3s}
+.seg i{display:block;height:2px;background:rgba(238,242,248,.18);position:relative;overflow:hidden}
+.seg i::after{content:"";position:absolute;inset:0;background:var(--on-ink);transform-origin:left;transform:scaleX(var(--f,0))}
+.seg.cur{color:var(--on-ink)}
+.seg span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#status{color:var(--on-ink-mute);white-space:nowrap;min-width:13ch;text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:560px){ .seg span{display:none} .seg.cur span{display:block;position:absolute;top:0;left:0} .segs{position:relative;padding-top:22px} }
+
+/* Bands */
+section.band{padding-block:clamp(72px,10vw,140px)}
+.head{align-items:end;row-gap:24px;margin-bottom:clamp(36px,5vw,64px)}
+.head h2{grid-column:1 / span 7;font-size:clamp(32px,5vw,72px)}
+.head p{grid-column:9 / span 4;color:var(--mute);max-width:36ch}
+@media (max-width:860px){ .head h2,.head p{grid-column:1 / -1} }
+
+/* Cars list */
+.cars{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.cars a{display:grid;grid-template-columns:72px minmax(0,1fr) 120px 170px 28px;align-items:center;gap:20px;padding:20px 12px;border-bottom:1px solid var(--line);text-decoration:none;transition:background .25s var(--ease)}
+.cars a:hover{background:var(--tint)}
+.cars .yr,.cars .cc,.cars .ft{font-family:var(--f-mono);font-size:14px;color:var(--mute);font-variant-numeric:tabular-nums}
+.cars .md{font:500 clamp(18px,1.6vw,22px)/1.2 var(--f-display);min-width:0}
+.cars .ar{color:var(--accent-fg);transition:transform .3s var(--ease);justify-self:end}
+.cars a:hover .ar{transform:translate(3px,-3px)}
+@media (max-width:720px){
+  .cars a{grid-template-columns:minmax(0,1fr) 24px;grid-template-areas:"yr ar" "md ar" "sp ar";gap:4px 12px;padding:16px 4px}
+  .cars .yr{grid-area:yr}.cars .md{grid-area:md}.cars .ar{grid-area:ar}
+  .cars .cc,.cars .ft{grid-area:sp;display:inline}
+  .cars .cc{justify-self:start}.cars .ft{justify-self:end;text-align:right}
+}
+.brands{margin-top:40px;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 22px}
+.brands .mono{color:var(--mute);margin-right:6px}
+.brands a{font-size:16px;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:border-color .2s,color .2s}
+.brands a:hover{border-color:var(--accent-fg);color:var(--accent-fg)}
+.more{margin-top:44px}
+
+/* Process */
+.proc{row-gap:48px}
+.proc .l{grid-column:1 / span 5}
+.proc .l .stick{position:sticky;top:calc(var(--hh) + 48px);display:grid;gap:28px}
+.proc .l h2{font-size:clamp(32px,4.4vw,64px)}
+.formula{border-top:1px solid var(--line);padding-top:22px;display:grid;gap:14px}
+.formula .mono{color:var(--mute)}
+.formula p{font:500 clamp(18px,1.6vw,22px)/1.45 var(--f-display)}
+.formula p em{font-style:normal;color:var(--accent-fg);padding-inline:.15em}
+.formula small{font-size:14px;color:var(--mute)}
+.steps{grid-column:7 / span 6;list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{display:grid;grid-template-columns:72px minmax(0,1fr);gap:4px 16px;padding:26px 0;border-top:1px solid var(--line)}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps .n{font:300 40px/1 var(--f-display);color:var(--accent-fg);grid-row:span 2}
+.steps h3{font-size:18px;letter-spacing:.02em;line-height:1.2}
+.steps p{color:var(--mute);max-width:46ch}
+.steps .hl{font-family:var(--f-mono);color:var(--fg);background:var(--tint);padding:1px 6px;border-radius:3px}
+@media (max-width:860px){ .proc .l,.steps{grid-column:1 / -1} .proc .l .stick{position:static} }
+
+/* Navy band */
+.navy{background:var(--ink);color:var(--on-ink)}
+.navy .head p{color:var(--on-ink-mute)}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,32px);border-top:1px solid rgba(238,242,248,.14)}
+.fact{padding-top:28px;display:grid;gap:14px;align-content:start}
+.fact .v{font:300 clamp(64px,8vw,128px)/.85 var(--f-display);letter-spacing:-.03em}
+.fact .v sup{font-size:.3em;vertical-align:top;color:var(--on-ink-mute);margin-left:4px}
+.fact p{color:#C9D3E3;max-width:28ch}
+.foot-note{margin-top:28px;color:var(--on-ink-mute);font-size:14px}
+@media (max-width:720px){ .facts{grid-template-columns:1fr} }
+.team{margin-top:clamp(56px,7vw,96px);display:grid;gap:18px}
+.team .mono{color:var(--on-ink-mute)}
+.team ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid rgba(238,242,248,.14)}
+.team li{padding:16px 16px 16px 0;display:grid;gap:4px;border-bottom:1px solid rgba(238,242,248,.14)}
+.team li b{font:500 18px/1.2 var(--f-display)}
+.team li span{font-family:var(--f-mono);font-size:14px;color:#C9D3E3;user-select:all;font-variant-numeric:tabular-nums}
+
+/* FAQ */
+.faq{row-gap:32px}
+.faq h2{grid-column:1 / span 4;font-size:clamp(32px,4.4vw,64px)}
+.faq .list{grid-column:6 / span 7;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font:500 clamp(17px,1.4vw,20px)/1.3 var(--f-display)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{flex:none;width:14px;height:14px;position:relative}
+.faq summary i::before,.faq summary i::after{content:"";position:absolute;left:0;right:0;top:6px;height:2px;background:var(--accent-fg);transition:transform .35s var(--ease)}
+.faq summary i::after{transform:rotate(90deg)}
+.faq details[open] summary i::after{transform:rotate(0)}
+.faq details p{padding:0 0 24px;color:var(--mute);max-width:58ch}
+@media (max-width:860px){ .faq h2,.faq .list{grid-column:1 / -1} }
+
+/* Contact */
+.contact{row-gap:40px;align-items:end}
+.contact h2{grid-column:1 / span 7;font-size:clamp(34px,5.6vw,88px)}
+.contact .r{grid-column:9 / span 4;display:grid;gap:22px}
+.contact .r p{color:var(--mute)}
+.contact .acts{display:flex;flex-wrap:wrap;gap:12px}
+.btn.ghost{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1px var(--line)}
+.btn.ghost:hover{background:var(--tint)}
+.phone{font:500 22px/1 var(--f-mono);user-select:all;font-variant-numeric:tabular-nums}
+.contact .r .mono{color:var(--mute)}
+@media (max-width:860px){ .contact h2,.contact .r{grid-column:1 / -1} }
+
+/* Footer */
+.foot{background:var(--ink);color:var(--on-ink-mute);padding-block:64px max(32px,env(safe-area-inset-bottom,0px));font-size:15px}
+.foot .g{row-gap:36px}
+.foot .brand{grid-column:1 / span 4;display:grid;gap:18px;align-content:start;color:var(--on-ink)}
+.foot .brand svg{height:44px;width:auto}
+.foot .brand p{color:var(--on-ink-mute);max-width:30ch}
+.foot .col{grid-column:span 2;display:grid;gap:10px;align-content:start}
+.foot .col .mono{color:var(--on-ink);margin-bottom:4px}
+.foot .col a{text-decoration:none}
+.foot .col a:hover{color:var(--on-ink)}
+.foot .base{grid-column:1 / -1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;border-top:1px solid rgba(238,242,248,.12)}
+@media (max-width:860px){ .foot .brand{grid-column:1 / -1} .foot .col{grid-column:span 4} }
+@media (max-width:520px){ .foot .col{grid-column:span 6} }
+
+@media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+</style>
+
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ahk-logo" viewBox="0 0 517 113">
+    <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M37 10.1a50.3 50.3 0 1 0 61.4 18.5 3 3 0 0 1 5.1-3.4A56.5 56.5 0 1 1 73.3 2.6a3 3 0 0 1-1.8 5.9A50 50 0 0 0 37 10m55.7 4.2a3.3 3.3 0 1 1-6.6 0 3.3 3.3 0 0 1 6.6 0M49.6 49.8q3.6-2.6 8.5-2.6 6 0 10.4 4.3Q73 56 73 62v11.6a3.2 3.2 0 0 1-6.4 0V62.2q0-3.4-2.2-6a8 8 0 0 0-6.2-2.7q-3.7 0-6.3 2.8a9 9 0 0 0-2.2 5.9v11.4a3.2 3.2 0 0 1-6.3 0V33.1a3.2 3.2 0 0 1 6.3 0z"/>
+    <path fill="currentColor" fill-opacity=".6" d="M140.6 88.6q-1.5 0-2.6-.6t-1.8-1.5-.6-2.2v-7q0-.4.2-.6l.6-.3.6.3.2.5v7.1q0 .8.4 1.5t1.2 1 1.8.3 1.7-.3l1.1-1q.4-.7.4-1.5v-7q0-.4.3-.6.2-.3.5-.3.5 0 .6.3l.2.5v7.1a4 4 0 0 1-2.3 3.7q-1.1.6-2.5.6m11-.3-.5-.2-.2-.6V77.2q0-.3.2-.5t.6-.3l.6.3 6.6 8.8v-8.3q0-.3.2-.5l.6-.3.6.3.2.5v10.3l-.2.6-.6.2h-.3l-.3-.3-6.6-8.8v8.3l-.3.6zm15.1 0q-.3 0-.5-.2l-.3-.6V77.2q0-.3.3-.5t.5-.3.6.3l.2.5v10.3l-.2.6zm16-.2-3.2-3.2-.3-.6.3-.5q.2-.2.5-.2t.6.2l3.1 3.2q.3.3.3.5l-.3.6-.5.2q-.3 0-.5-.2m-4.2.4q-1.3 0-2.5-.5a6 6 0 0 1-3.1-3.2q-.4-1.1-.4-2.4 0-1.4.4-2.5.4-1 1.2-2 .8-.7 2-1.2 1-.4 2.4-.4t2.4.4a6 6 0 0 1 3.2 3.2q.4 1.2.4 2.5t-.4 2.4a6 6 0 0 1-3.2 3.2q-1 .5-2.4.5m0-1.5a5 5 0 0 0 3.3-1.3q.6-.7.9-1.5l.3-1.8-.3-1.9a4 4 0 0 0-4.2-2.8q-1 0-1.8.4a5 5 0 0 0-2.4 2.5l-.3 1.8q0 .9.3 1.8a5 5 0 0 0 2.4 2.5q.8.3 1.8.3m16 1.6q-1.6 0-2.7-.6-1-.5-1.7-1.5a4 4 0 0 1-.7-2.2v-7q0-.4.3-.6.2-.3.5-.3.5 0 .6.3l.2.5v7.1q0 .8.5 1.5.3.6 1.2 1 .7.3 1.7.3t1.7-.3q.8-.4 1.2-1t.4-1.5v-7q0-.4.2-.6.2-.3.6-.3t.5.3q.3.2.3.5v7.1a4 4 0 0 1-.7 2.2q-.6 1-1.7 1.5-1 .6-2.5.6m17.9-.3h-6.9q-.3 0-.5-.2l-.3-.6V77.2q0-.3.3-.5t.5-.3h6.9l.6.2.2.6-.2.5-.6.2h-6v3.7h4.3q.3 0 .5.2t.3.5-.3.5-.5.2h-4.4v3.8h6q.4 0 .7.3l.2.5-.2.5zm16.4 0q-.5 0-.7-.5l-4.5-10.2q-.2-.5 0-.8 0-.4.6-.4t.7.5l4 9.4h-.2l4-9.4.2-.4h.5q.5 0 .6.3v.7l-4.5 10.3q0 .3-.3.4zm17.2 0H239q-.3 0-.5-.2l-.3-.6V77.2q0-.3.3-.5t.5-.3h6.9l.6.2.2.6-.2.5-.6.2h-6v3.7h4.3l.6.2.2.5-.2.5q-.3.3-.6.2h-4.4v3.8h6.1l.6.3.2.5-.2.5zm6.2 0-.6-.2-.2-.6V77.2q0-.3.2-.5l.6-.3.6.3.2.5v4.4h7v-4.4q0-.3.3-.5t.5-.3.6.3.2.5v10.3l-.2.6-.6.2a1 1 0 0 1-.7-.8V83h-7v4.5l-.2.6zm15.7 0-.6-.2-.2-.6V77.2q0-.3.2-.5l.6-.3.6.3.2.5v10.3l-.2.6zm11.6.2q-1.2 0-2.3-.5a6 6 0 0 1-3.1-3.2q-.5-1.2-.5-2.4 0-1.3.5-2.4.5-1.2 1.2-2a6 6 0 0 1 6.2-1.4 6 6 0 0 1 1.9 1.2v.4l-.1.5-.5.2-.6-.2q-.5-.5-1.1-.7-.6-.3-1.6-.3a4 4 0 0 0-3.1 1.4q-.6.6-1 1.5-.3.8-.3 1.8t.4 1.8l.9 1.5 1.4 1a4 4 0 0 0 3.1 0q.8-.2 1.4-.7l.5-.2.5.2.1.6v.3l-.2.2a6 6 0 0 1-3.7 1.4m16-.2h-6.3l-.6-.2-.2-.6V77.2q0-.3.2-.5l.6-.3a1 1 0 0 1 .8.8v9.5h5.5a1 1 0 0 1 .8.8l-.3.6zm12.8 0h-7a1 1 0 0 1-.7-.8V77.2q0-.3.2-.5l.6-.3h6.9l.5.2.2.6q0 .3-.2.5l-.5.2h-6.1v3.7h4.3q.4 0 .6.2.3.2.2.5t-.2.5-.6.2h-4.3v3.8h6q.4 0 .6.3.2.1.2.5 0 .3-.2.5zm15.8 0-.6-.2-.2-.6v-11h1.6v11l-.2.6zm4-10.4h-8a1 1 0 0 1-.8-.7 1 1 0 0 1 .7-.8h8.1a.7.7 0 0 1 .8.8 1 1 0 0 1-.8.7m5.8 10.4a1 1 0 0 1-.8-.8V77.2q0-.3.2-.5t.6-.3h2.7a4 4 0 0 1 2 .5q.9.5 1.4 1.3t.5 2a3 3 0 0 1-1.9 3q-.9.6-2 .5h-2v3.8l-.2.6zm6.3 0h-.4l-.3-.4-2.8-4.4 1.6-.4 2.5 4q.3.5 0 .8 0 .4-.6.4M334.6 78v4.4h2q.8 0 1.2-.3.6-.3.9-.7.3-.6.3-1.1 0-.7-.3-1.2t-.9-.8q-.4-.3-1.2-.3zm10 10.4-.6-.3v-.8l4.2-10.2q.3-.6.8-.6t.7.6l4.3 10.2v.8q-.3.3-.7.3l-.5-.1-.3-.4-3.7-9.3h.4l-3.8 9.3-.3.4zm8-2.6h-7.2l.7-1.3h5.9zm9.2 2.6H359q-.3 0-.5-.2l-.3-.6V77.2q0-.3.3-.5t.5-.3h2.8q1.2 0 2.4.5a6 6 0 0 1 3 3q.5 1.2.5 2.5 0 1.2-.5 2.4-.4 1-1.2 1.8a6 6 0 0 1-4.2 1.7m-2-10.5V87h2q1.3 0 2.2-.6a4 4 0 0 0 1.6-1.6q.5-1 .5-2.3 0-1.4-.5-2.4a4 4 0 0 0-1.6-1.6q-1-.6-2.2-.6zm13.6 10.5a1 1 0 0 1-.8-.8V77.2q0-.3.2-.5t.6-.3.5.3.2.5v10.3l-.2.6zm7 0q-.3 0-.5-.2l-.3-.6V77.2q0-.3.3-.5t.5-.3l.6.3 6.6 8.8v-8.3q0-.3.3-.5t.5-.3.6.3l.2.5v10.3l-.2.6-.6.2h-.3l-.3-.3-6.6-8.8v8.3l-.2.6zm19.6.2a6 6 0 0 1-4.2-1.8q-.8-.8-1.2-2-.5-1-.5-2.3a6 6 0 0 1 3.6-5.7q1-.4 2.3-.4l2 .3a6 6 0 0 1 2 1.2v.4q0 .3-.2.5l-.5.2q-.3 0-.5-.2-.6-.5-1.2-.7-.6-.3-1.6-.3l-1.7.4a4 4 0 0 0-2.3 2.5q-.3.8-.3 1.8a5 5 0 0 0 2.6 4.3 4 4 0 0 0 3.2 0q.6-.2 1.3-.7l.6-.2.4.2.2.6v.3l-.3.2q-.7.7-1.7 1t-2 .4m4-5.6v3.7l-1.5-.3v-2.8h-2.1l-.6-.1-.2-.5.2-.6.6-.2h2.8l.6.3zm12.6 5.4q-.3 0-.5-.2l-.3-.6V77.2q0-.3.3-.5t.5-.3h3a4 4 0 0 1 2 .5q1 .5 1.5 1.4.5 1 .5 2 0 1.2-.5 2t-1.4 1.4a4 4 0 0 1-2 .5h-2.3v3.3l-.2.6zm.8-10.4v4.8h2.3q.6 0 1.2-.3l.8-.8.3-1.2q0-.8-.3-1.3t-.8-.9l-1.2-.3zm17.4 10.4h-6.3q-.3 0-.5-.2l-.3-.6V77.2q0-.3.3-.5t.5-.3l.6.3.2.5v9.5h5.5l.6.3.2.5-.2.6zm4.7 0-.7-.3v-.8L443 77q.3-.6.8-.6t.7.6l4.3 10.2q.2.4 0 .8-.3.3-.7.3l-.4-.1-.3-.4-3.8-9.3h.4l-3.8 9.3q0 .3-.3.4zm8-2.6h-7.2l.6-1.3h6zm7.9 2.6q-.4 0-.6-.2l-.2-.6v-11h1.5v11l-.2.6zm4-10.4h-8.1a1 1 0 0 1-.7-.7 1 1 0 0 1 .7-.8h8.1a.7.7 0 0 1 .8.8 1 1 0 0 1-.8.7m4.8 10.4q-.4 0-.6-.2l-.2-.6V77.2q0-.3.2-.5t.6-.3h6.8l.6.2.2.6q0 .3-.2.5l-.6.2h-6v3.7h4.3l.6.2.2.5q0 .3-.2.5t-.6.2H465v4.5l-.3.6zm17.6.2q-1.5 0-2.5-.5a6 6 0 0 1-3.1-3.2q-.5-1.1-.5-2.4 0-1.4.5-2.5.4-1 1.2-2 .8-.7 2-1.2 1-.4 2.4-.4t2.4.4a6 6 0 0 1 3.2 3.2q.4 1.2.4 2.5t-.4 2.4a6 6 0 0 1-3.2 3.2q-1.1.5-2.4.5m0-1.5a5 5 0 0 0 3.2-1.3q.6-.7 1-1.5l.3-1.8-.4-1.9a4 4 0 0 0-4.1-2.8q-1 0-1.9.4-.8.3-1.4 1a5 5 0 0 0-1.3 3.3q0 .9.4 1.8.3.8 1 1.5a4 4 0 0 0 3.2 1.3m11.7 1.3a1 1 0 0 1-.8-.8V77.2q0-.3.2-.5l.6-.3h2.7q1.2 0 2 .5 1 .5 1.4 1.3.6.8.5 2a3 3 0 0 1-1.8 3q-1 .6-2 .5h-2v3.8l-.2.6zm6.3 0h-.4l-.3-.4-2.7-4.4 1.5-.4 2.5 4q.3.5.1.8t-.7.4M494.3 78v4.4h2l1.2-.3.8-.7q.3-.6.3-1.1 0-.7-.3-1.2t-.8-.8-1.3-.3zm11.2 10.4q-.3 0-.5-.2l-.2-.6V77.2q0-.3.2-.5t.5-.3q.5 0 .7.5l4.8 9.5h-.5l4.7-9.5q.2-.5.7-.5.3 0 .5.3t.2.5v10.3l-.2.6-.5.2q-.4 0-.6-.2l-.2-.6v-8l.3-.2-4 8.2q-.3.4-.7.4-.5 0-.7-.5l-4-8h.3v8.1l-.2.6z"/>
+    <path fill="currentColor" d="M149 65.5q-3.9 0-6.9-2-3-1.9-4.8-5.1a16 16 0 0 1-1.7-7.4 15 15 0 0 1 7-12.6q3.3-2 7.4-2A14 14 0 0 1 164.4 51h-2q0 4-1.8 7.4a14 14 0 0 1-4.8 5.1q-3 2-6.8 2m1-4.7a9 9 0 0 0 8-4.8q1.3-2.3 1.3-5 0-2.9-1.2-5a9 9 0 0 0-3.3-3.6 9 9 0 0 0-4.8-1.2 9 9 0 0 0-8 4.8q-1.3 2.1-1.3 5 0 2.7 1.2 5a9 9 0 0 0 8.1 4.8m11.7 4.5q-1.2 0-1.9-.8-.7-.7-.7-1.9v-8l1-5.5 4.3 1.9v11.6a2.6 2.6 0 0 1-2.7 2.7m22.6.2q-3.6 0-6.4-1.5-3-1.5-4.5-4.6a15 15 0 0 1-1.6-7.3V39.3a2.6 2.6 0 0 1 2.6-2.7 2.6 2.6 0 0 1 2.7 2.7V52q0 3 1 4.9a7 7 0 0 0 3 2.8q2 .9 4.3.9t4-.9a7 7 0 0 0 2.8-2.4q1-1.5 1-3.4h3.3a11 11 0 0 1-6 10q-2.6 1.5-6.2 1.5m11.6-.3a2.6 2.6 0 0 1-2.7-2.6V39.3q0-1.2.8-2 .7-.7 1.9-.7t2 .7q.6.8.6 2v23.3q0 1.1-.7 1.9t-2 .7m23.4 0h-1q-2.6 0-4.7-1.3a9 9 0 0 1-3.2-3.6 11 11 0 0 1-1.2-5.2v-25q0-1 .7-1.8.7-.7 1.9-.7t1.8.7q.8.7.8 1.9v25q0 2 1.1 3.4 1.1 1.5 2.9 1.4h1.7a2 2 0 0 1 1.6.8q.7.6.7 1.8 0 1.1-.9 2-.9.6-2.2.6m-.5-23h-12q-1.2 0-1.8-.6a2 2 0 0 1-.7-1.6q0-1 .7-1.7t1.8-.6h12q1.1 0 1.8.6t.7 1.7a2 2 0 0 1-.7 1.6q-.7.6-1.8.6m23 23.3q-4.2 0-7.4-1.9t-5.1-5.1a15 15 0 0 1-1.9-7.5q0-4.3 1.9-7.6t5-5q3.3-2 7.6-2t7.4 2 5 5a15 15 0 0 1 2 7.6 15 15 0 0 1-1.9 7.5 13 13 0 0 1-5 5.1 15 15 0 0 1-7.5 1.9m0-4.7q2.8 0 4.9-1.3 2.1-1.2 3.2-3.4t1.2-5.1-1.2-5.1a9 9 0 0 0-8-4.7q-2.7 0-4.8 1.2a9 9 0 0 0-3.3 3.5q-1.2 2.3-1.2 5 0 3 1.2 5.2a9 9 0 0 0 8 4.7m25-6q-1.1 0-1.9-.7t-.7-2v-25q0-1.1.7-2 .8-.6 2-.7t1.9.8q.7.7.7 2v25q0 1.2-.7 1.9-.8.8-2 .8m21.5 10.5a2.6 2.6 0 0 1-2.7-2.7V49.8q0-3-1-4.9a7 7 0 0 0-3-2.8q-1.8-.9-4.3-.9-2 0-4 1a7 7 0 0 0-2.8 2.3q-1 1.5-1 3.4h-3.3q0-3.3 1.6-5.9 1.5-2.5 4.4-4 2.7-1.5 6.2-1.6 3.6 0 6.4 1.6 3 1.5 4.5 4.5a15 15 0 0 1 1.7 7.3v12.8a2.6 2.6 0 0 1-2.7 2.7m-21.5 0q-1.1 0-1.9-.8-.7-.7-.7-1.9V39.3q0-1.2.7-1.9.8-.7 2-.7t1.9.7.7 2v23.2q0 1.1-.7 2-.8.7-2 .7m45 .2q-3.5 0-6.4-1.5-2.8-1.5-4.5-4.6-1.6-3-1.6-7.3V39.3a2.6 2.6 0 0 1 2.6-2.7 2.6 2.6 0 0 1 2.7 2.7V52q0 3 1.1 4.9a7 7 0 0 0 3 2.8q1.9.9 4.2.9 2.2 0 4-.9a7 7 0 0 0 2.8-2.4q1-1.5 1-3.4h3.3a11 11 0 0 1-5.9 10q-2.7 1.5-6.2 1.5m11.6-.3a2.6 2.6 0 0 1-2.6-2.6V39.3q0-1.2.7-2 .8-.7 2-.7t1.9.7.7 2v23.3q0 1.1-.7 1.9-.8.7-2 .7m26.5.3a14 14 0 0 1-14.4-14.6V27.1q0-1.1.7-2 .9-.6 2-.7t1.9.8q.7.7.7 2v14q1.8-2.2 4.4-3.5t5.7-1.2q3.8 0 6.9 1.9 3 1.9 4.7 5.1 1.8 3.3 1.8 7.4a14 14 0 0 1-7 12.6q-3.3 2-7.4 2m0-4.7a9 9 0 0 0 8-4.8q1.3-2.3 1.3-5 0-3-1.3-5-1.2-2.3-3.3-3.6a9 9 0 0 0-4.7-1.2 9 9 0 0 0-8 4.7q-1.3 2.3-1.3 5 0 2.9 1.2 5a9 9 0 0 0 8 4.9m43.4-20.3-16 14.3-3.3-3.5 16-14.4q.8-.7 1.8-.6t1.6.8.7 1.7-.8 1.7m-18.5 24.7q-1.2 0-1.9-.7t-.7-1.8V27q0-1.2.7-1.9t1.9-.7 1.8.7.7 2v35.6q0 1.2-.7 1.8t-1.8.7m18.6-.2q-.7.6-1.8.6-1 0-1.7-1l-10.6-13 3.6-3.5 11 13.4q.6.8.5 1.8t-1 1.7m18.9.5q-4.2 0-7.5-1.9t-5-5.1a15 15 0 0 1-2-7.5q0-4.3 2-7.6 1.8-3.2 5-5 3.3-2 7.5-2t7.4 2 5.1 5a15 15 0 0 1 1.9 7.6 15 15 0 0 1-1.9 7.5 13 13 0 0 1-5 5.1 15 15 0 0 1-7.5 1.9m0-4.7q2.7 0 4.8-1.3 2.1-1.2 3.3-3.4t1.1-5.1-1.1-5.1a9 9 0 0 0-8.1-4.7q-2.7 0-4.8 1.2a9 9 0 0 0-3.3 3.5q-1.2 2.3-1.2 5 0 3 1.2 5.2a9 9 0 0 0 8 4.7m27.5-13.4h-2.6q0-3.2 1.5-5.6a11 11 0 0 1 9.9-5.4q3.1 0 4.7 1 1.5 1 1.2 2.4-.2.8-.6 1.1l-1 .5h-1.3q-3.3-.7-6-.1a8 8 0 0 0-4.2 2.1q-1.5 1.6-1.6 4m-2.6 17.8q-1.2 0-2-.6-.6-.6-.6-2V39.3q0-1.3.7-2 .5-.6 2-.6 1.2 0 1.9.6t.6 2v23.3q0 1.3-.6 2t-2 .6m34.1.3q-4.3 0-7.7-1.9t-5.2-5.1q-2-3.3-2-7.5t1.8-7.6q1.9-3.2 5-5 3.3-2 7.4-2 4 0 7 1.9 2.9 1.8 4.4 5 1.5 3 1.6 7.2 0 1-.7 1.7t-1.8.6h-21v-4.2h21l-2.1 1.5q0-2.6-1-4.7a8 8 0 0 0-3-3.2 8 8 0 0 0-4.3-1.2q-3 0-5.1 1.3-2.2 1.2-3.3 3.5a12 12 0 0 0 .2 10.3q1.4 2.3 3.7 3.6a11 11 0 0 0 8.6.7q1.6-.6 2.7-1.4a3 3 0 0 1 1.7-.6q.9 0 1.6.5.9.8 1 1.7 0 1-1 1.7-1.7 1.4-4.3 2.3-2.7.9-5 .9m30 0q-4 0-7-2-3-1.9-4.7-5.1a16 16 0 0 1-1.8-7.4 15 15 0 0 1 7.1-12.6q3.3-2 7.4-2A14 14 0 0 1 516.6 51h-2q0 4-1.8 7.4a14 14 0 0 1-4.7 5.1q-3 2-6.9 2m1-4.7a9 9 0 0 0 8-4.8q1.2-2.3 1.2-5 0-2.9-1.2-5a9 9 0 0 0-8-4.8 9 9 0 0 0-8.1 4.8q-1.1 2-1.1 5 0 2.7 1.2 5a9 9 0 0 0 8 4.8m11.7 4.5a2.6 2.6 0 0 1-2.7-2.7v-8l1-5.5 4.3 1.9v11.6a2.6 2.6 0 0 1-2.6 2.7"/>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M4 12 12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 16 16"><path d="M8 2v12M3 9l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+</svg>
+
+<header class="top wrap" lang="ru">
+  <div class="in">
+    <a class="logo" href="#film" aria-label="AutoHubKorea, наверх"><svg viewBox="0 0 517 113" role="img" aria-hidden="true"><use href="#ahk-logo"/></svg></a>
+    <nav aria-label="Разделы">
+      <a href="https://cars.autohubkorea.com/ru" target="_blank" rel="noopener">Каталог авто</a>
+      <a href="#process">Как заказать</a>
+      <a href="#about">О компании</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a class="btn" href="#contact">Подобрать авто</a>
+  </div>
+</header>
+
+<main lang="ru">
+  <section class="film" id="film" aria-label="Путь машины из Кореи: подбор, проверка, экспорт, доставка">
+    <div class="stage">
+      <canvas id="cv" aria-hidden="true"></canvas>
+      <div class="scrim"></div>
+      <div class="ui wrap">
+        <div class="in">
+
+          <div class="ch on" data-a="0" data-b="0.11" style="opacity:1">
+            <div class="count mono"><b>01</b><span>/ 05</span><span>Подбор</span></div>
+            <div class="g">
+              <h1>Авто из&nbsp;Кореи под&nbsp;ключ</h1>
+              <div class="side">
+                <p>Подберём машину на корейском рынке, проверим до покупки и отправим в ваш город.</p>
+                <div class="acts">
+                  <a class="btn" href="#contact">Подобрать авто</a>
+                  <a class="link" href="https://cars.autohubkorea.com/ru" target="_blank" rel="noopener">Открыть каталог</a>
+                </div>
+                <p class="note">Менеджеры отвечают в WhatsApp и Telegram, 24/7.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ch" data-a="0.16" data-b="0.30">
+            <div class="count mono"><b>02</b><span>/ 05</span><span>Проверка</span></div>
+            <div class="g">
+              <h2>Проверяем до&nbsp;покупки</h2>
+              <div class="side">
+                <p>Замеряем толщину ЛКП, смотрим историю, снимаем фото и видео. Отчёт получаете до подписания договора.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ch" data-a="0.36" data-b="0.50">
+            <div class="count mono"><b>03</b><span>/ 05</span><span>Экспорт</span></div>
+            <div class="g">
+              <h2>Экспорт оформляем&nbsp;мы</h2>
+              <div class="side">
+                <p>Работаем официально в Республике Корея. Готовим экспортные документы и отправляем машину.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ch" data-a="0.56" data-b="0.68">
+            <div class="count mono"><b>04</b><span>/ 05</span><span>В пути</span></div>
+            <div class="g">
+              <div class="big">
+                <span class="num">30–45</span>
+                <span class="cap">дней от заявки<br>до вашего города<sup>*</sup></span>
+              </div>
+              <div class="side">
+                <p class="note">* Средний срок покупки и доставки. Точный срок зависит от страны и маршрута.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ch" data-a="0.76" data-b="1">
+            <div class="count mono"><b>05</b><span>/ 05</span><span>Доставка</span></div>
+            <div class="g">
+              <h2>Доставляем по&nbsp;всему миру</h2>
+              <div class="side">
+                <p>Машины уже уехали в десятки стран. Растаможить, переоформить и поставить на учёт помогут партнёры в стране получателя.</p>
+                <div class="acts"><a class="btn" href="#cars">Смотреть машины <svg aria-hidden="true"><use href="#i-down"/></svg></a></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="track wrap" aria-hidden="true">
+        <div class="in">
+          <div class="segs">
+            <div class="seg cur" data-a="0" data-b="0.15"><i></i><span class="mono">Подбор</span></div>
+            <div class="seg" data-a="0.15" data-b="0.33"><i></i><span class="mono">Проверка</span></div>
+            <div class="seg" data-a="0.33" data-b="0.53"><i></i><span class="mono">Экспорт</span></div>
+            <div class="seg" data-a="0.53" data-b="0.72"><i></i><span class="mono">В пути</span></div>
+            <div class="seg" data-a="0.72" data-b="1"><i></i><span class="mono">Доставка</span></div>
+          </div>
+          <span id="status" class="mono">Прокрутите ↓</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band wrap" id="cars">
+    <div class="in">
+      <div class="g head">
+        <h2>Проходные авто с&nbsp;льготным утильсбором</h2>
+        <p>Подборка из каталога: машины 2021–2023 годов. Цену, пробег и фото смотрите на странице модели.</p>
+      </div>
+      <ul class="cars">
+        <li><a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.Year.range%28202012..202212%29._.%28C.CarType.A._.%28C.Manufacturer.%25EA%25B8%25B0%25EC%2595%2584._.%28C.ModelGroup.%25EC%2585%2580%25ED%2586%25A0%25EC%258A%25A4._.%28C.Model.%25EB%258D%2594%2520%25EB%2589%25B4%2520%25EC%2585%2580%25ED%2586%25A0%25EC%258A%25A4._.BadgeGroup.%25EA%25B0%2580%25EC%2586%2594%25EB%25A6%25B0%25202000cc.%29%29%29%29%29" target="_blank" rel="noopener"><span class="yr">2023</span><span class="md">Kia Seltos 2.0</span><span class="cc">1 999 см³</span><span class="ft">бензин · автомат</span><svg class="ar" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.Year.range%28202012..202212%29._.%28C.CarType.A._.%28C.Manufacturer.%25ED%2598%2584%25EB%258C%2580._.%28C.ModelGroup.%25EC%2595%2584%25EB%25B0%2598%25EB%2596%25BC._.%28C.Model.%25EC%2595%2584%25EB%25B0%2598%25EB%2596%25BC%2520%28CN7_%29._.BadgeGroup.%25EA%25B0%2580%25EC%2586%2594%25EB%25A6%25B0%25202000cc.%29%29%29%29%29" target="_blank" rel="noopener"><span class="yr">2022</span><span class="md">Hyundai Avante 2.0</span><span class="cc">1 999 см³</span><span class="ft">бензин · автомат</span><svg class="ar" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.Year.range%28202012..202212%29._.%28C.CarType.A._.%28C.Manufacturer.%25ED%2598%2584%25EB%258C%2580._.%28C.ModelGroup.%25EB%25B2%25A0%25EB%2589%25B4._.%28C.Model.%25EB%25B2%25A0%25EB%2589%25B4._.BadgeGroup.%25EA%25B0%2580%25EC%2586%2594%25EB%25A6%25B0%25201600cc.%29%29%29%29%29" target="_blank" rel="noopener"><span class="yr">2023</span><span class="md">Hyundai Venue 1.6</span><span class="cc">1 598 см³</span><span class="ft">бензин · автомат</span><svg class="ar" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.Year.range%28202012..202212%29._.%28C.CarType.A._.%28C.Manufacturer.%25EB%25A5%25B4%25EB%2585%25B8%25EC%25BD%2594%25EB%25A6%25AC%25EC%2595%2584%28%25EC%2582%25BC%25EC%2584%25B1_%29._.%28C.ModelGroup.XM3._.%28C.Model.XM3._.BadgeGroup.%25EA%25B0%2580%25EC%2586%2594%25EB%25A6%25B0%25201300cc.%29%29%29%29%29" target="_blank" rel="noopener"><span class="yr">2021</span><span class="md">Renault XM3 1.3T</span><span class="cc">1 332 см³</span><span class="ft">бензин · автомат</span><svg class="ar" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.Year.range%28202012..202212%29._.%28C.CarType.A._.%28C.Manufacturer.%25ED%258F%25AD%25EC%258A%25A4%25EB%25B0%2594%25EA%25B2%2590._.%28C.ModelGroup.%25EA%25B3%25A8%25ED%2594%2584._.%28C.Model.%25EA%25B3%25A8%25ED%2594%2584%25208%25EC%2584%25B8%25EB%258C%2580._.BadgeGroup.%25EB%2594%2594%25EC%25A0%25A4%25202000cc.%29%29%29%29%29" target="_blank" rel="noopener"><span class="yr">2022</span><span class="md">Volkswagen Golf 2.0 TDI</span><span class="cc">1 968 см³</span><span class="ft">дизель · автомат</span><svg class="ar" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.Year.range%28202012..202212%29._.%28C.CarType.A._.%28C.Manufacturer.BMW._.%28C.ModelGroup.1%25EC%258B%259C%25EB%25A6%25AC%25EC%25A6%2588._.%28C.Model.1%25EC%258B%259C%25EB%25A6%25AC%25EC%25A6%2588%2520%28F40_%29._.BadgeGroup.%25EB%2594%2594%25EC%25A0%25A4%25202WD.%29%29%29%29%29" target="_blank" rel="noopener"><span class="yr">2021</span><span class="md">BMW 118d</span><span class="cc">1 995 см³</span><span class="ft">дизель · автомат</span><svg class="ar" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.Year.range%28202012..202212%29._.%28C.CarType.A._.%28C.Manufacturer.%25EB%25B2%25A4%25EC%25B8%25A0._.%28C.ModelGroup.A-%25ED%2581%25B4%25EB%259E%2598%25EC%258A%25A4._.%28C.Model.A-%25ED%2581%25B4%25EB%259E%2598%25EC%258A%25A4%2520W177._.BadgeGroup.%25EB%2594%2594%25EC%25A0%25A4%25202WD.%29%29%29%29%29" target="_blank" rel="noopener"><span class="yr">2021</span><span class="md">Mercedes-Benz A200d</span><span class="cc">1 950 см³</span><span class="ft">дизель · автомат</span><svg class="ar" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.Year.range%28202012..202212%29._.%28C.CarType.A._.%28C.Manufacturer.%25EC%2595%2584%25EC%259A%25B0%25EB%2594%2594._.%28C.ModelGroup.A4._.%28C.Model.A4%2520%28B9_%29._.%28Or.BadgeGroup.%25EB%2594%2594%25EC%25A0%25A4%25202WD._.BadgeGroup.%25EB%2594%2594%25EC%25A0%25A4%25204WD.%29%29%29%29%29%29" target="_blank" rel="noopener"><span class="yr">2021</span><span class="md">Audi A4</span><span class="cc">1 968 см³</span><span class="ft">дизель · автомат</span><svg class="ar" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+      </ul>
+      <div class="brands">
+        <span class="mono">Марки в каталоге</span>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.%25EA%25B8%25B0%25EC%2595%2584.%29%29" target="_blank" rel="noopener">Kia</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.%25ED%2598%2584%25EB%258C%2580.%29%29" target="_blank" rel="noopener">Hyundai</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.%25EC%25A0%259C%25EB%2584%25A4%25EC%258B%259C%25EC%258A%25A4.%29%29" target="_blank" rel="noopener">Genesis</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.%25EB%25B2%25A4%25EC%25B8%25A0.%29%29" target="_blank" rel="noopener">Mercedes-Benz</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.BMW.%29%29" target="_blank" rel="noopener">BMW</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.%25EC%2595%2584%25EC%259A%25B0%25EB%2594%2594.%29%29" target="_blank" rel="noopener">Audi</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.%25EB%25A0%2589%25EC%2584%259C%25EC%258A%25A4.%29%29" target="_blank" rel="noopener">Lexus</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.%25EB%258F%2584%25EC%259A%2594%25ED%2583%2580.%29%29" target="_blank" rel="noopener">Toyota</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.%25ED%2585%258C%25EC%258A%25AC%25EB%259D%25BC.%29%29" target="_blank" rel="noopener">Tesla</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.%25ED%258F%25AC%25EB%25A5%25B4%25EC%2589%2590.%29%29" target="_blank" rel="noopener">Porsche</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.%25EB%25A7%2588%25EC%2584%25B8%25EB%259D%25BC%25ED%258B%25B0.%29%29" target="_blank" rel="noopener">Maserati</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.%25EC%259D%25B8%25ED%2594%25BC%25EB%258B%2588%25ED%258B%25B0.%29%29" target="_blank" rel="noopener">Infiniti</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.%25EC%2589%2590%25EB%25B3%25B4%25EB%25A0%2588.%29%29" target="_blank" rel="noopener">Chevrolet</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.%25ED%2591%25B8%25EC%25A1%25B0.%29%29" target="_blank" rel="noopener">Peugeot</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.KG%25EB%25AA%25A8%25EB%25B9%258C%25EB%25A6%25AC%25ED%258B%25B0%28%25EC%258C%258D%25EC%259A%25A9_%29.%29%29" target="_blank" rel="noopener">KG Mobility</a>
+        <a href="https://cars.autohubkorea.com/ru?q=%28And.Hidden.N._.SellType.%25EC%259D%25BC%25EB%25B0%2598._.%28C.CarType.A._.Manufacturer.%25ED%258F%25AD%25EC%258A%25A4%25EB%25B0%2594%25EA%25B2%2590.%29%29" target="_blank" rel="noopener">Volkswagen</a>
+      </div>
+      <div class="more"><a class="btn" href="https://cars.autohubkorea.com/ru" target="_blank" rel="noopener">Открыть весь каталог <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+    </div>
+  </section>
+
+  <section class="band wrap" id="process" style="padding-top:0">
+    <div class="in g proc">
+      <div class="l">
+        <div class="stick">
+          <h2>Как проходит покупка</h2>
+          <div class="formula">
+            <span class="mono">Цена под ключ</span>
+            <p>стоимость авто <em>+</em> доставка <em>+</em> госсборы <em>+</em> наша комиссия</p>
+            <small>Комиссия фиксированная, других платежей нет.</small>
+          </div>
+        </div>
+      </div>
+      <ol class="steps">
+        <li><span class="n">1</span><h3>Выбор авто</h3><p>Выбираете машину в каталоге и оставляете заявку.</p></li>
+        <li><span class="n">2</span><h3>Расчёт стоимости</h3><p>Подбираем похожие варианты и считаем цену под ключ.</p></li>
+        <li><span class="n">3</span><h3>Бронь</h3><p>Вносите депозит <span class="hl">$1000</span>, и машина закреплена за вами.</p></li>
+        <li><span class="n">4</span><h3>Полная проверка</h3><p>Проверяем состояние и историю, замеряем ЛКП, присылаем фото- и видеоотчёт.</p></li>
+        <li><span class="n">5</span><h3>Договор</h3><p>Фиксируем условия в договоре и оформляем покупку.</p></li>
+        <li><span class="n">6</span><h3>Отправка</h3><p>Готовим экспортные документы и отправляем машину в ваш город.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band navy wrap" id="about">
+    <div class="in">
+      <div class="g head">
+        <h2>Работаем в&nbsp;Корее с&nbsp;2020 года</h2>
+        <p>Подбираем, проверяем и отправляем машины, водную технику и квадроциклы. Компания зарегистрирована в Республике Корея.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><span class="v">1000+</span><p>машин лично проверили и доставили клиентам</p></div>
+        <div class="fact"><span class="v">24/7</span><p>менеджеры на связи в WhatsApp и Telegram</p></div>
+        <div class="fact"><span class="v">9/10<sup>*</sup></span><p>клиентов рекомендуют нас знакомым</p></div>
+      </div>
+      <p class="foot-note">* По данным компании.</p>
+      <div class="team">
+        <span class="mono">Менеджеры в Корее</span>
+        <ul>
+          <li><b>Кирилл</b><span>+82 10-8073-1013</span></li>
+          <li><b>Лео</b><span>+82 10-7398-9775</span></li>
+          <li><b>Лаура</b><span>+82 10-6294-3575</span></li>
+          <li><b>Аяна</b><span>+82 10-7445-4975</span></li>
+          <li><b>Александр</b><span>+82 10-7770-3897</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="band wrap" id="faq">
+    <div class="in g faq">
+      <h2>Частые вопросы</h2>
+      <div class="list">
+        <details open><summary>Сколько времени занимают покупка и доставка?<i></i></summary><p>В среднем 30–45 дней от заявки до получения машины.</p></details>
+        <details><summary>Что входит в цену «под ключ»?<i></i></summary><p>Стоимость машины, доставка, государственные сборы и наша комиссия. Комиссия фиксированная, других платежей нет.</p></details>
+        <details><summary>Какие гарантии вы даёте?<i></i></summary><p>Условия сделки записаны в договоре. До подписания вы получаете отчёт о проверке с фото и видео. Корейские машины обычно в хорошем состоянии: мягкий климат, ровные дороги и регулярное обслуживание.</p></details>
+        <details><summary>Как проходит проверка?<i></i></summary><p>Делаем комплексную диагностику: замеряем толщину ЛКП, проверяем историю, снимаем фото и видео. Отчёт присылаем до покупки.</p></details>
+        <details><summary>Как оплатить и в какой валюте?<i></i></summary><p>По инвойсу или через наших партнёров. Валюту и способ оплаты уточните у менеджера.</p></details>
+        <details><summary>Кто растаможит машину в моей стране?<i></i></summary><p>Наши партнёры в стране получателя помогут с растаможкой, переоформлением и постановкой машины на учёт.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="band wrap" id="contact" style="padding-top:0">
+    <div class="in g contact">
+      <h2>Подберём машину под&nbsp;ваш бюджет</h2>
+      <div class="r">
+        <p>Напишите марку, модель и бюджет. Пришлём варианты из каталога и посчитаем цену под ключ.</p>
+        <div class="acts">
+          <a class="btn" href="https://api.whatsapp.com/send?phone=79294999077" target="_blank" rel="noopener">Написать в WhatsApp</a>
+          <a class="btn ghost" href="https://t.me/autohubkorea" target="_blank" rel="noopener">Telegram</a>
+        </div>
+        <span class="mono">WhatsApp</span>
+        <span class="phone">+7 929 499-90-77</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot wrap" lang="ru">
+  <div class="in g">
+    <div class="brand">
+      <svg viewBox="0 0 517 113" role="img" aria-label="AutoHubKorea"><use href="#ahk-logo"/></svg>
+      <p>Автомобили и техника из Южной Кореи под ключ.</p>
+    </div>
+    <div class="col">
+      <span class="mono">Компания</span>
+      <a href="#about">О компании</a>
+      <a href="#process">Как заказать</a>
+      <a href="#faq">Вопросы</a>
+    </div>
+    <div class="col">
+      <span class="mono">Транспорт</span>
+      <a href="https://cars.autohubkorea.com/ru" target="_blank" rel="noopener">Каталог авто</a>
+      <a href="https://autohubkorea.com/ru/water-transport" target="_blank" rel="noopener">Водная техника</a>
+      <a href="https://autohubkorea.com/ru/atv" target="_blank" rel="noopener">Квадроциклы</a>
+    </div>
+    <div class="col">
+      <span class="mono">Связь</span>
+      <a href="https://api.whatsapp.com/send?phone=79294999077" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://t.me/autohub_kr" target="_blank" rel="noopener">Telegram менеджера</a>
+      <a href="https://t.me/autohubkorea" target="_blank" rel="noopener">Telegram-канал</a>
+      <a href="https://www.instagram.com/autohubkorea/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <div class="base">
+      <span>© 2026 AUTOHUBKOREA</span>
+      <span class="mono">Черновик для согласования · 21.10.2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const N = 169;                      // кадры ролика (каждый второй из 337, 24 fps, 14 с)
+  const DUR = 14;
+  const film = document.getElementById('film');
+  const stage = film.querySelector('.stage');
+  const cv = document.getElementById('cv');
+  const ctx = cv.getContext('2d');
+  const chs = [...film.querySelectorAll('.ch')].map(el => ({ el, a: +el.dataset.a, b: +el.dataset.b }));
+  const segs = [...film.querySelectorAll('.seg')].map(el => ({ el, a: +el.dataset.a, b: +el.dataset.b, bar: el.querySelector('i') }));
+  const status = document.getElementById('status');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ink = getComputedStyle(document.documentElement).getPropertyValue('--ink').trim() || '#041532';
+
+  /* загрузка кадров: сначала первый и последний, потом всё более плотная сетка */
+  const frames = new Array(N).fill(null);
+  const order = [0, N - 1]; const seen = new Set(order);
+  [24, 12, 6, 3, 1].forEach(s => { for (let i = 0; i < N; i += s) if (!seen.has(i)) { seen.add(i); order.push(i); } });
+  let qi = 0, done = 0;
+  const pad = i => String(i).padStart(3, '0');
+  function next() {
+    if (qi >= order.length) return;
+    const i = order[qi++];
+    const im = new Image();
+    im.decoding = 'async';
+    im.onload = () => { frames[i] = im; done++; dirty = true; next(); };
+    im.onerror = () => { done++; next(); };
+    im.src = `frames/f${pad(i)}.webp`;
+  }
+  for (let k = 0; k < 6; k++) next();
+
+  let W = 0, H = 0, dpr = 1, dirty = true, cur = 0, shown = -2;
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const r = stage.getBoundingClientRect();
+    W = r.width; H = r.height;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    dirty = true;
+  }
+  function nearest(idx) {
+    if (frames[idx]) return frames[idx];
+    for (let d = 1; d < N; d++) {
+      if (idx - d >= 0 && frames[idx - d]) return frames[idx - d];
+      if (idx + d < N && frames[idx + d]) return frames[idx + d];
+    }
+    return null;
+  }
+  function draw(idx) {
+    const im = nearest(idx);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = ink; ctx.fillRect(0, 0, W, H);
+    if (!im) return;
+    const iw = im.naturalWidth, ih = im.naturalHeight;
+    let s, dx, dy;
+    if (W / H >= 1) {                       // горизонтальный экран: кадр на весь экран
+      s = Math.max(W / iw, H / ih); dx = (W - iw * s) / 2; dy = (H - ih * s) / 2;
+    } else {                                // вертикальный: полоса кадра ниже текста
+      s = Math.max((W * 1.45) / iw, (H * 0.4) / ih); dx = (W - iw * s) / 2; dy = H * 0.66 - (ih * s) / 2;
+    }
+    ctx.drawImage(im, dx, dy, iw * s, ih * s);
+    if (W / H < 1) {
+      const h = ih * s, f = Math.min(80, h * 0.25);
+      let g = ctx.createLinearGradient(0, dy, 0, dy + f); g.addColorStop(0, ink); g.addColorStop(1, 'rgba(4,21,50,0)');
+      ctx.fillStyle = g; ctx.fillRect(0, dy - 1, W, f + 1);
+      g = ctx.createLinearGradient(0, dy + h - f, 0, dy + h); g.addColorStop(0, 'rgba(4,21,50,0)'); g.addColorStop(1, ink);
+      ctx.fillStyle = g; ctx.fillRect(0, dy + h - f, W, f + 1);
+    }
+  }
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  function progress() {
+    const total = film.offsetHeight - stage.offsetHeight;
+    return total > 0 ? clamp(-film.getBoundingClientRect().top / total, 0, 1) : 0;
+  }
+  const F = 0.035;
+  function vis(p, a, b) {
+    if (p < a - F || p > b + F) return 0;
+    let o = 1;
+    if (a > 0) o = Math.min(o, (p - (a - F)) / F);
+    if (b < 1) o = Math.min(o, (b + F - p) / F);
+    return clamp(o, 0, 1);
+  }
+  let lastP = -1;
+  function ui(p) {
+    for (const c of chs) {
+      const o = vis(p, c.a, c.b);
+      c.el.style.opacity = o.toFixed(3);
+      c.el.style.transform = reduce ? '' : `translateY(${((1 - o) * 14).toFixed(1)}px)`;
+      c.el.classList.toggle('on', o > 0.01);
+    }
+    for (const s of segs) {
+      s.bar.style.setProperty('--f', clamp((p - s.a) / (s.b - s.a), 0, 1).toFixed(3));
+      s.el.classList.toggle('cur', p >= s.a && (p < s.b || s.b === 1));
+    }
+    if (done < N) status.textContent = `Кадры ${done}/${N}`;
+    else status.textContent = p < 0.015 ? 'Прокрутите ↓' : `${(p * DUR).toFixed(1)} / ${DUR} с`;
+  }
+  function tick() {
+    const t = progress();
+    cur = reduce ? t : cur + (t - cur) * 0.18;
+    if (Math.abs(t - cur) < 0.0004) cur = t;
+    const idx = Math.round(cur * (N - 1));
+    if (idx !== shown || dirty) { draw(idx); shown = idx; dirty = false; }
+    if (Math.abs(cur - lastP) > 0.0002 || done < N) { ui(cur); lastP = cur; }
+    requestAnimationFrame(tick);
+  }
+  window.addEventListener('resize', resize);
+  resize(); ui(0); requestAnimationFrame(tick);
+})();
+</script>
+
+</body>
+</html>
